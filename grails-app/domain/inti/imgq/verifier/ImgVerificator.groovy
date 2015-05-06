@@ -8,9 +8,12 @@ class ImgVerificator {
 
     String imgSrc
     int nfiqValue
-    String params
+    String params = ""
 
     static constraints = {
+      imgSrc nullable: false
+      nfiqValue nullable: true
+      params nullable: true
     }
 
     /**
@@ -19,7 +22,7 @@ class ImgVerificator {
      * @return el valor NFIQ asociado a la imagen
     */
     int nfiq() {
-      nfiqValue = ("nfiq -d " + imgSrc).execute().text.trim()[-1].toInteger()
+      nfiqValue = ("nfiq -d " + params + imgSrc).execute().text.trim()[-1].toInteger()
       return nfiqValue
     }
 }
