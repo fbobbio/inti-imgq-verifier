@@ -19,8 +19,16 @@ class ImgVerificatorController {
 
     def imageQuality() {
       def verificator = new ImgVerificator(params)
+      def msg
       verificator.nfiq()
-      render "El valor NFIQ de la imagen con ruta " + verificator.imgSrc + " es: " +  verificator.nfiqValue
+      msg = "El valor NFIQ de la imagen con ruta " + verificator.imgSrc + " es: " +  verificator.nfiqValue
+      if (verificator.nfiqValue > 3) {
+        msg+= "\nLA IMAGEN NO CUMPLE LOS REQUISITOS MÍNIMOS DE CALIDAD DEL PROTOCOLO DE ANSES"
+      }
+      else {
+        msg+= "\nLA IMAGEN POSEE UNA CALIDAD ACEPTABLE PARA EL PROTOCOLO DE ANSES"
+      }
+      render msg
     }
 
     def create() {
