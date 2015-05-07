@@ -11,7 +11,14 @@
         <g:layoutHead/>
     </head>
     <body>
-        <div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a></div>
+        <div id="top" role="banner" width="1288"><a href="http://www.inti.gob.ar" ></a>
+         <div class="to_left">
+           <div class="logo">
+             <h1><asset:image src="logo_D.png" alt="Instituto Nacional de Tecnología Industrial" width="304" height="118"/></h1>
+          </div>
+         </div>
+         <div class="to_right"></div>
+        </div>
         <g:layoutBody/>
         <div class="footer" role="contentinfo"></div>
         <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

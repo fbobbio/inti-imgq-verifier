@@ -18,7 +18,6 @@ class ImgVerificatorController {
     }
 
     def checkImageQuality() {
-      log.error 'Parámetros: ' + params
       def verificator = processFile(request)
       verificator.nfiq()
       save(verificator)

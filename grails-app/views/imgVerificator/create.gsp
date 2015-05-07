@@ -10,11 +10,11 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="list" action="index"><g:message code="verificator.list.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
         <div id="create-imgVerificator" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h1><g:message code="verificator.create.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -26,7 +26,7 @@
             </ul>
             </g:hasErrors>
             <g:uploadForm action="checkImageQuality">
-              <label for="img">Imagen de huella digital:</label>
+              <label for="img" >Imagen de huella digital:</label>
               <input type="file" name="img" size="60" accept=".wsq">
               <input type="submit">
             </g:uploadForm>
