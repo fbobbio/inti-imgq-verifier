@@ -19,14 +19,11 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
+            <g:if test="${flash.warning}">
+            <div class="errors" role="status"><li>${flash.warning}</li></div>
+            </g:if>
             <f:display bean="imgVerificator" />
             </ol>
-            <g:form resource="${imgVerificator}" method="DELETE">
-                <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${imgVerificator}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </fieldset>
-            </g:form>
         </div>
     </body>
 </html>

@@ -17,18 +17,10 @@ class ImgVerificatorController {
         respond imgVerificator
     }
 
-    def imageQuality() {
-      def verificator = new ImgVerificator(params)
-      def msg
+    def checkImageQuality() {
+      def verificator = processFile(request)
       verificator.nfiq()
-      msg = "El valor NFIQ de la imagen con ruta " + verificator.imgSrc + " es: " +  verificator.nfiqValue
-      if (verificator.nfiqValue > 3) {
-        msg+= "\nLA IMAGEN NO CUMPLE LOS REQUISITOS MÍNIMOS DE CALIDAD DEL PROTOCOLO DE ANSES"
-      }
-      else {
-        msg+= "\nLA IMAGEN POSEE UNA CALIDAD ACEPTABLE PARA EL PROTOCOLO DE ANSES"
-      }
-      render msg
+      save(verificator)
     }
 
     def create() {
@@ -53,8 +45,13 @@ class ImgVerificatorController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'imgVerificator.label', default: 'ImgVerificator'), imgVerificator.id])
-                redirect imgVerificator
+              if (imgVerificator.nfiqValue <= 3) {
+                flash.message = message(code: 'default.created.verified.message', args: [message(code: 'imgVerificator.label', default: 'ImgVerificator'), imgVerificator.id, imgVerificator.nfiqValue])
+              }
+              else {
+                flash.warning = message(code: 'default.created.unverified.message', args: [message(code: 'imgVerificator.label', default: 'ImgVerificator'), imgVerificator.id, imgVerificator.nfiqValue])
+              }
+            redirect imgVerificator
             }
             '*' { respond imgVerificator, [status: CREATED] }
         }
@@ -117,5 +114,22 @@ class ImgVerificatorController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    protected ImgVerificator processFile(Object request) {
+      def fileName = request.getFileNames()[0]
+      def f = request.getFile('img')
+      def file = new File('/home/fbobbio/nist-temp/' + fileName)
+      def verificator = createImgVerificator(f,file.getAbsolutePath())
+      f.transferTo(file)
+      return verificator
+    }
+
+    protected ImgVerificator createImgVerificator(Object f, String path) {
+      def verificator = new ImgVerificator()
+      verificator.img = f.bytes
+      verificator.imgType = f.contentType
+      verificator.imgSrc = path
+      return verificator
     }
 }

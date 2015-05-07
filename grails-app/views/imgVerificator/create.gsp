@@ -25,14 +25,11 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form action="save">
-                <fieldset class="form">
-                    <f:all bean="imgVerificator"/>
-                </fieldset>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
-            </g:form>
+            <g:uploadForm action="checkImageQuality">
+              <label for="img">Imagen de huella digital:</label>
+              <input type="file" name="img" size="60" accept=".wsq">
+              <input type="submit">
+            </g:uploadForm>
         </div>
     </body>
 </html>

@@ -24,8 +24,9 @@ class ImgVerificatorSpec extends Specification {
           ImgVerificator verificator = new ImgVerificator()
         when:
           verificator.imgSrc = urlBase + src
+          verificator.nfiq()
         then:
-          verificator.nfiq() == val
+          verificator.nfiqValue == val
         where:
           src || val
           "reference_images/a001.wsq" || 5
