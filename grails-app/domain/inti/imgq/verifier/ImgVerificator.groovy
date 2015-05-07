@@ -6,14 +6,11 @@ package inti.imgq.verifier
 */
 class ImgVerificator {
 
-    byte[] img
-    String imgType
     String imgSrc
     int nfiqValue
     String params = ""
 
     static constraints = {
-      img nullable:false, maxSize: 1048576 /* 1MB */
       imgSrc nullable: false
       nfiqValue nullable: true
       params nullable: true

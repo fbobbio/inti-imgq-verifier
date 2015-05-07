@@ -18,6 +18,7 @@ class ImgVerificatorController {
     }
 
     def checkImageQuality() {
+      log.error 'Parámetros: ' + params
       def verificator = processFile(request)
       verificator.nfiq()
       save(verificator)
@@ -117,18 +118,14 @@ class ImgVerificatorController {
     }
 
     protected ImgVerificator processFile(Object request) {
-      def fileName = request.getFileNames()[0]
       def f = request.getFile('img')
-      def file = new File('/home/fbobbio/nist-temp/' + fileName)
-      def verificator = createImgVerificator(f,file.getAbsolutePath())
+      def file = new File('/home/fbobbio/nist-temp/' + f.getOriginalFilename())
       f.transferTo(file)
-      return verificator
+      return createImgVerificator(file.getAbsolutePath())
     }
 
-    protected ImgVerificator createImgVerificator(Object f, String path) {
+    protected ImgVerificator createImgVerificator(String path) {
       def verificator = new ImgVerificator()
-      verificator.img = f.bytes
-      verificator.imgType = f.contentType
       verificator.imgSrc = path
       return verificator
     }
