@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main"/>
-        <title>Welcome to Grails</title>
+        <title>INTI Verificador de Calidad de Imagen de Huellas Digitales</title>
         <style type="text/css" media="screen">
             #status {
                 background-color: #eee;
@@ -104,17 +104,23 @@
             </ul>
         </div>
         <div id="page-body" role="main">
-            <h1>Welcome to Grails</h1>
-            <p>Congratulations, you have successfully started your first Grails application! At the moment
-               this is the default page, feel free to modify it to either redirect to a controller or display whatever
-               content you may choose. Below is a list of controllers that are currently deployed in this application,
-               click on each to execute its default action:</p>
+            <h1>Bienvenidos al servicio de Verificación de Calidad de Imagen de INTI</h1>
+            <br>
+            <p>El presente aplicativo sirve a la necesidad de verificar la calidad de imágenes en formato ANSI/NIST comprimidas con el algoritmo <g:link id="wsqLink" url="http://en.wikipedia.org/wiki/Wavelet_scalar_quantization" target="_blank">WSQ</g:link></p>
+            <p>Se recibe una imagen de Huella Digital de extensión '.wsq0' la cual se procesa con la implementación del algoritmo <g:link target="_blank" url="http://www.nist.gov/customcf/get_pdf.cfm?pub_id=905710">NFIQ</g:link> del aplicativo oficial <g:link target="_blank" url="http://www.nist.gov/itl/iad/ig/nbis.cfm">NBIS</g:link> provisto por el <g:link target="_blank" url="http://www.nist.gov/">National Institute of Standards and Technology (NIST)</g:link> de los Estados Unidos, distribuído sin requerimientos de licencia.</p>
+            <br>
+            <p><ul>
+              <li>Los 5 niveles de calidad de NFIQ’s están destinados a ser predictivos de la performance de un sistema de búsqueda a través de minucias de la huella dactilar.</li>
+              <li>NFIQ = 1 indica una buena calidad de muestra, se espera un bajo FMR y/o FNMR.</li>
+              <li>NFIQ = 5 indica una mala calidad de muestra, se espera un alto FMR y/o FNMR.</li>
+            </ul></p>
+            <br>
 
             <div id="controller-list" role="navigation">
-                <h2>Available Controllers:</h2>
+                <h2>Funcionalidad disponible</h2>
                 <ul>
                     <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
+                        <li class="controller"><g:link controller="${c.logicalPropertyName}">Validar Calidad de Imagen</g:link></li>
                     </g:each>
                 </ul>
             </div>
